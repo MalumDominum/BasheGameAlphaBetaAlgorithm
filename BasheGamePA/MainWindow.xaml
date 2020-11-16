@@ -1,0 +1,176 @@
+﻿<Window x:Class="BasheGamePA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BasheGamePA"
+        mc:Ignorable="d"
+        Title="Kill the Boss" Height="450" Width="800"
+        ResizeMode="NoResize"
+        Icon="skull.ico"
+        KeyDown="ChooseNumber_OnKeyDown"
+        ShowInTaskbar="True"
+        WindowStartupLocation="CenterScreen"
+        Background="#333">
+    <Grid>
+        <TextBlock FontSize="24" 
+                   Foreground="#FF32EBFB" 
+                   Margin="200 0 0 105"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center">Boss Health Points</TextBlock>
+        <TextBox x:Name="BossHealthPointsTextBox"
+                 MaxLength="3"
+                 Width="190"
+                 Height="65"
+                 FontSize="24"
+                 VerticalAlignment="Stretch"
+                 HorizontalAlignment="Center"
+                 Margin="200 0 0 0">15</TextBox>
+        <TextBox x:Name ="DealDamageP1TextBox"
+                 TextChanged="DealDamageP1TextBox_TextChanged"
+                 MaxLength="2"
+                 Width="120"
+                 Height="45"
+                 FontSize="24"
+                 VerticalAlignment="Bottom"
+                 HorizontalAlignment="Center"
+                 Margin="200 0 0 50">3</TextBox>
+        <TextBox x:Name ="DealDamageP2TextBox" 
+                 TextChanged="DealDamageP2TextBox_TextChanged"
+                 MaxLength="2"
+                 Width="120"
+                 Height="45"
+                 FontSize="24"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Center"
+                 Margin="200 50 0 0">3</TextBox>
+        <TextBlock x:Name="P1TextBlock"
+                   FontSize="24" 
+                   Foreground="#FF32EBFB" 
+                   Margin="200 0 0 100"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Bottom">Max Deal Damage</TextBlock>
+        <TextBlock x:Name="P2TextBlock" 
+                   FontSize="24" 
+                   Foreground="#FF32EBFB" 
+                   Margin="200 15 0 0"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top">Max Deal Damage</TextBlock>
+        <TextBlock x:Name="P1MaxDamage" 
+                   FontSize="30" 
+                   Foreground="#FF32EBFB" 
+                   Margin="25 0 0 53"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Bottom"></TextBlock>
+        <TextBlock x:Name="P2MaxDamage" 
+                   FontSize="30" 
+                   Foreground="#FF32EBFB" 
+                   Margin="25 53 0 0"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top"></TextBlock>
+        <ComboBox x:Name="GameModeComboBox"
+                  SelectionChanged="GameModeComboBox_Selected"
+                  Height="60" Width="240"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="30 30 0 0"
+                  FontSize="24"
+                  MaxDropDownHeight="600">
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center">Two Players</TextBlock>
+                <ContentControl Content="{StaticResource GamerIcon}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="30 0 0 0"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem IsSelected="True">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center">AI (Easy)</TextBlock>
+                    <ContentControl Content="{StaticResource ComputerEasyIcon}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="60 0 0 0"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center">AI (Medium)</TextBlock>
+                    <ContentControl Content="{StaticResource ComputerMediumIcon}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="20 0 0 0"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center">AI (Hard)</TextBlock>
+                    <ContentControl Content="{StaticResource ComputerHardIcon}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="55 0 0 0"/>
+                </StackPanel>
+            </ComboBoxItem>
+        </ComboBox>
+        <CheckBox x:Name="SwordCheck"
+                  Checked="SwordCheckBox_Checked"
+                  Unchecked="SwordCheckBox_Unchecked"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Margin="60 300 0 80" Width="17"/>
+        <CheckBox x:Name="PotionCheck"
+                  Checked="PotionCheckBox_Checked"
+                  Unchecked="PotionCheckBox_Unchecked"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Margin="60 0 0 75" Width="17"/>
+        <Button x:Name="StartButton"
+                Click="StartButton_OnClick"
+                IsDefault="True"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="0 0 50 50" Height="50" Width="120"
+                Content="Start"
+                FontSize="30"/>
+        <ContentControl Content="{StaticResource EnemyIcon}"
+                        x:Name="EnemyIcon"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0 0 60 0" Height="95" Width="100" />
+        <ContentControl Content="{StaticResource PotionIcon}"
+                        x:Name="PotionIcon"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="100 0 0 80" Height="120" Width="120"
+                        Visibility="Collapsed"/>
+        <ContentControl Content="{StaticResource PotionIconDisabled}"
+                        x:Name="PotionIconDisabled"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="100 0 0 80" Height="120" Width="120"/>
+        <ContentControl Content="{StaticResource SwordIcon}" 
+                        x:Name="SwordIcon"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="90 220 0 0" Height="120" Width="120"
+                        Visibility="Collapsed"/>
+        <ContentControl Content="{StaticResource SwordIconDisabled}" 
+                        x:Name="SwordIconDisabled"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="90 220 0 0" Height="120" Width="120"/>
+        <ContentControl Content="{StaticResource TrophyIcon}"
+                        x:Name="TrophyIcon"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0 0 110 300" Height="90" Width="77"
+                        Visibility="Collapsed"/>
+        <ContentControl Content="{StaticResource FlagIcon}"
+                        x:Name="FlagIcon"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0 250 110 0" Height="90" Width="90"
+                        Visibility="Collapsed"/>
+    </Grid>
+</Window>
